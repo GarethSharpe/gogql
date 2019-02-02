@@ -1,0 +1,10 @@
+# Asset sObject
+type Asset {
+    Id: String
+    Name: String
+}
+
+# Input asset sObject
+input InputAsset {
+    Name: String
+}

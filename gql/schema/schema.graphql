@@ -1,0 +1,10 @@
+# Query type
+type Query {
+  Case(id: String!): Case!
+  Cases: [Case!]!
+}
+
+# Mutation type
+type Mutation {
+  CreateCase(case: InputCase!): String!
+}

@@ -1,0 +1,40 @@
+
+# Case sObject
+type Case {
+    Id: String
+    Name: String
+    Asset: Asset
+    CaseNumber: String
+    Origin: String
+    Owner: User
+    Reason: String
+    IsClosed: String
+    IsClosedOnCreate: String
+    Contact: Contact
+    CreatedBy: User
+    ClosedDate: String
+    CreatedDate: String
+    IsDeleted: String
+    Description: String
+    IsEscalated: String
+    LastModifiedBy: User
+    LastModifiedDate: String
+    LastReferencedDate: String
+    LastViewedDate: String
+}
+
+# Input Case sObject
+input InputCase {
+    AssetId: String
+    BusinessHoursId: String	
+    CaseNumber: String
+    Origin: String
+    OwnerId: String
+    Reason: String
+    IsClosed: String
+    Name: String
+    IsDeleted: String
+    Description: String
+    IsEscalated: String
+}
+	

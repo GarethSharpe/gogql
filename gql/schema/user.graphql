@@ -1,0 +1,10 @@
+# User sObject
+type User {
+    Id: String
+    Name: String
+}
+
+# Input user sObject
+input InputUser {
+    Name: String
+}

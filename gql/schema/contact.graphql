@@ -1,0 +1,10 @@
+# Contact sObject
+type Contact {
+    Id: String
+    Name: String
+}
+
+# Input contact sObject
+input InputContact {
+    Name: String
+}
