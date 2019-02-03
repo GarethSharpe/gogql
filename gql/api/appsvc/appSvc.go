@@ -1,34 +1,42 @@
 package api
 
 import (
+	repos "github.com/garethsharpe/gql/api/infra"
 	"github.com/garethsharpe/gql/models"
-	"github.com/garethsharpe/gql/api/infra"
 )
 
-type AppSvc struct { 
-	CaseRepo repos.CaseRepo
+type AppSvc struct {
+	CaseRepo repos.ICaseRepo
 }
 
 type IAppSvc interface {
-	GetCase(accessToken string, id string) (models.Case, error)
-	GetCases(accessToken string) ([]models.Case, error)
+	GetCase(accessToken string, id string) (*models.Case, error)
+	GetCases(accessToken string) (*[]models.Case, error)
 	CreateCase(accessToken string, caseArg models.InputCase) (string, error)
 }
 
-func GetAppSvcInstance() IAppSvc {
+func GetAppSvcInstance() AppSvc {
 	caseRepo := repos.CaseRepo{}
 	appSvcInstance := AppSvc{
-		CaseRepo: caseRepo,
+		CaseRepo: &caseRepo,
 	}
-	return &appSvcInstance
+	return appSvcInstance
 }
 
-func (svc *AppSvc) GetCase(accessToken string, id string) (models.Case, error) {
+func GetTestAppSvcInstance() AppSvc {
+	mockCaseRepo := repos.MockCaseRepo{}
+	appSvcInstance := AppSvc{
+		CaseRepo: &mockCaseRepo,
+	}
+	return appSvcInstance
+}
+
+func (svc *AppSvc) GetCase(accessToken string, id string) (*models.Case, error) {
 	returnCase, err := svc.CaseRepo.GetCase(accessToken, id)
 	return returnCase, err
 }
 
-func (svc *AppSvc) GetCases(accessToken string) ([]models.Case, error) {
+func (svc *AppSvc) GetCases(accessToken string) (*[]models.Case, error) {
 	cases, err := svc.CaseRepo.GetCases(accessToken)
 	return cases, err
 }

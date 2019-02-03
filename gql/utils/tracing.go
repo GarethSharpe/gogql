@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 func WithTracing(next http.HandlerFunc) http.HandlerFunc {
