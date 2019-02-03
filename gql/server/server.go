@@ -9,14 +9,13 @@ import (
 	"github.com/garethsharpe/gql/generated"
 	"github.com/garethsharpe/gql/resolvers"
 	"github.com/garethsharpe/gql/utils"
+	"github.com/garethsharpe/gql/api/appsvc"
 )
 
 func main() {
 
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	if port == "" { port = "8080" }
 
 	mw := utils.ChainMiddleware(
 		utils.WithHeaders,
@@ -24,7 +23,7 @@ func main() {
 		utils.WithTracing,
 	)
 
-	appSvc := utils.GetAppSvcInstance()
+	appSvc := api.GetAppSvcInstance()
 
 	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
 	http.Handle("/query", mw(handler.GraphQL(generated.NewExecutableSchema(generated.Config{Resolvers: &resolvers.Resolver{AppSvc: appSvc}}))))
