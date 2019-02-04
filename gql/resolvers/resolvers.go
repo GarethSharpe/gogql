@@ -1,8 +1,8 @@
 package resolvers
 
 import (
-	"github.com/garethsharpe/gql/api/appsvc"
-	"github.com/garethsharpe/gql/generated"
+	"gogql/gql/api/appsvc"
+	"gogql/gql/generated"
 )
 
 

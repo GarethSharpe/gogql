@@ -24,7 +24,6 @@ type InputCase struct {
 	OwnerID         *string `json:"OwnerId"`
 	Reason          *string `json:"Reason"`
 	IsClosed        *string `json:"IsClosed"`
-	Name            *string `json:"Name"`
 	IsDeleted       *string `json:"IsDeleted"`
 	Description     *string `json:"Description"`
 	IsEscalated     *string `json:"IsEscalated"`

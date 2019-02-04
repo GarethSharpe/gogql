@@ -1,8 +1,8 @@
 package api
 
 import (
-	repos "github.com/garethsharpe/gql/api/infra"
-	"github.com/garethsharpe/gql/models"
+	repos "gogql/gql/api/infra"
+	"gogql/gql/models"
 )
 
 type AppSvc struct {

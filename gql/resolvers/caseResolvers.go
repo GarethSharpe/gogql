@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/garethsharpe/gql/models"
+	"gogql/gql/models"
 )
 
 type caseResolver struct{ *Resolver }

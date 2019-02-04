@@ -10,7 +10,7 @@ model:
   type: Model
 models:
   Case:
-    model: github.com/garethsharpe/gql/models.Case
+    model: gogql/gql/models.Case
 resolver:
   filename: resolvers/resolvers.go
   package: resolvers

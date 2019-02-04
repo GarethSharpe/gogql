@@ -1,8 +1,8 @@
 package repos
 
 import (
-	"github.com/garethsharpe/gql/models"
-	"github.com/garethsharpe/gql/utils"
+	"gogql/gql/models"
+	"gogql/gql/utils"
 )
 
 type MockCaseRepo struct {

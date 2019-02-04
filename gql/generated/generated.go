@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"gogql/gql/models"
 	"strconv"
 	"sync"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/garethsharpe/gql/models"
 	"github.com/vektah/gqlparser"
 	"github.com/vektah/gqlparser/ast"
 )
@@ -48,14 +48,12 @@ type ComplexityRoot struct {
 
 	Case struct {
 		Id                 func(childComplexity int) int
-		Name               func(childComplexity int) int
 		Asset              func(childComplexity int) int
 		CaseNumber         func(childComplexity int) int
 		Origin             func(childComplexity int) int
 		Owner              func(childComplexity int) int
 		Reason             func(childComplexity int) int
 		IsClosed           func(childComplexity int) int
-		IsClosedOnCreate   func(childComplexity int) int
 		Contact            func(childComplexity int) int
 		CreatedBy          func(childComplexity int) int
 		ClosedDate         func(childComplexity int) int
@@ -216,13 +214,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Case.Id(childComplexity), true
 
-	case "Case.Name":
-		if e.complexity.Case.Name == nil {
-			break
-		}
-
-		return e.complexity.Case.Name(childComplexity), true
-
 	case "Case.Asset":
 		if e.complexity.Case.Asset == nil {
 			break
@@ -264,13 +255,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Case.IsClosed(childComplexity), true
-
-	case "Case.IsClosedOnCreate":
-		if e.complexity.Case.IsClosedOnCreate == nil {
-			break
-		}
-
-		return e.complexity.Case.IsClosedOnCreate(childComplexity), true
 
 	case "Case.Contact":
 		if e.complexity.Case.Contact == nil {
@@ -556,8 +540,6 @@ func (ec *executionContext) _Case(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = graphql.MarshalString("Case")
 		case "Id":
 			out.Values[i] = ec._Case_Id(ctx, field, obj)
-		case "Name":
-			out.Values[i] = ec._Case_Name(ctx, field, obj)
 		case "Asset":
 			wg.Add(1)
 			go func(i int, field graphql.CollectedField) {
@@ -578,8 +560,6 @@ func (ec *executionContext) _Case(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = ec._Case_Reason(ctx, field, obj)
 		case "IsClosed":
 			out.Values[i] = ec._Case_IsClosed(ctx, field, obj)
-		case "IsClosedOnCreate":
-			out.Values[i] = ec._Case_IsClosedOnCreate(ctx, field, obj)
 		case "Contact":
 			wg.Add(1)
 			go func(i int, field graphql.CollectedField) {
@@ -639,30 +619,6 @@ func (ec *executionContext) _Case_Id(ctx context.Context, field graphql.Collecte
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.Id, nil
-	})
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	rctx.Result = res
-	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return graphql.MarshalString(res)
-}
-
-// nolint: vetshadow
-func (ec *executionContext) _Case_Name(ctx context.Context, field graphql.CollectedField, obj *models.Case) graphql.Marshaler {
-	ctx = ec.Tracer.StartFieldExecution(ctx, field)
-	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
-	rctx := &graphql.ResolverContext{
-		Object: "Case",
-		Args:   nil,
-		Field:  field,
-	}
-	ctx = graphql.WithResolverContext(ctx, rctx)
-	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
-	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Name, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -817,30 +773,6 @@ func (ec *executionContext) _Case_IsClosed(ctx context.Context, field graphql.Co
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.IsClosed, nil
-	})
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	rctx.Result = res
-	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return graphql.MarshalString(res)
-}
-
-// nolint: vetshadow
-func (ec *executionContext) _Case_IsClosedOnCreate(ctx context.Context, field graphql.CollectedField, obj *models.Case) graphql.Marshaler {
-	ctx = ec.Tracer.StartFieldExecution(ctx, field)
-	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
-	rctx := &graphql.ResolverContext{
-		Object: "Case",
-		Args:   nil,
-		Field:  field,
-	}
-	ctx = graphql.WithResolverContext(ctx, rctx)
-	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
-	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.IsClosedOnCreate, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3128,17 +3060,6 @@ func UnmarshalInputCase(v interface{}) (models.InputCase, error) {
 			if err != nil {
 				return it, err
 			}
-		case "Name":
-			var err error
-			var ptr1 string
-			if v != nil {
-				ptr1, err = graphql.UnmarshalString(v)
-				it.Name = &ptr1
-			}
-
-			if err != nil {
-				return it, err
-			}
 		case "IsDeleted":
 			var err error
 			var ptr1 string
@@ -3268,14 +3189,12 @@ input InputAsset {
 # Case sObject
 type Case {
     Id: String
-    Name: String
     Asset: Asset
     CaseNumber: String
     Origin: String
     Owner: User
     Reason: String
     IsClosed: String
-    IsClosedOnCreate: String
     Contact: Contact
     CreatedBy: User
     ClosedDate: String
@@ -3298,7 +3217,6 @@ input InputCase {
     OwnerId: String
     Reason: String
     IsClosed: String
-    Name: String
     IsDeleted: String
     Description: String
     IsEscalated: String

@@ -3,8 +3,8 @@ package resolvers
 import (
 	"context"
 
-	"github.com/garethsharpe/gql/utils"
-	"github.com/garethsharpe/gql/models"
+	"gogql/gql/utils"
+	"gogql/gql/models"
 )
 
 type mutationResolver struct{ *Resolver }

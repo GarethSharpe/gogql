@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/garethsharpe/gql/models"
-	"github.com/garethsharpe/gql/utils"
+	"gogql/gql/models"
+	"gogql/gql/utils"
 )
 
 type CaseRepo struct {
@@ -29,19 +29,9 @@ type Response struct {
 func (r *CaseRepo) GetCase(accessToken string, id string) (*models.Case, error) {
 	var c models.Case
 	connection, err := utils.GetConnection(accessToken)
-	if err != nil {
-		return nil, err
-	}
-	err = connection.GetSObject(id, nil, c)
-	if err != nil {
-		return nil, err
-	}
-	// for _, found := range r.cases {
-	// 	 if found.Id == id {
-	// 		c = found
-	// 		break
-	// 	 }
-	// }
+	if err != nil { return nil, err }
+	err = connection.GetSObject(id, nil, &c)
+	if err != nil { return nil, err }
 	return &c, nil
 }
 
@@ -79,7 +69,6 @@ func (r *CaseRepo) GetCases(accessToken string) (*[]models.Case, error) {
 func (r *CaseRepo) CreateCase(accessToken string, caseArg models.InputCase) (string, error) {
 	id := fmt.Sprintf("T%d", rand.Int())
 	c := models.Case{
-		Name: *caseArg.Name,
 		Id:   id,
 	}
 	r.cases = append(r.cases, c)

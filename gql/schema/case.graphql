@@ -2,14 +2,12 @@
 # Case sObject
 type Case {
     Id: String
-    Name: String
     Asset: Asset
     CaseNumber: String
     Origin: String
     Owner: User
     Reason: String
     IsClosed: String
-    IsClosedOnCreate: String
     Contact: Contact
     CreatedBy: User
     ClosedDate: String
@@ -32,7 +30,6 @@ input InputCase {
     OwnerId: String
     Reason: String
     IsClosed: String
-    Name: String
     IsDeleted: String
     Description: String
     IsEscalated: String

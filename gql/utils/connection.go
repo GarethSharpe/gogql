@@ -7,13 +7,16 @@ import (
 	"github.com/subosito/gotenv"
 )
 
-func GetConnection(accessToken string) (f.ForceApi, error) {
+func GetConnection(accessToken string) (*f.ForceApi, error) {
 	gotenv.Load()
+	consumerKey := os.Getenv(DEV_CONSUMER_KEY)
+	version := os.Getenv(VERSION)
+	instanceURL := os.Getenv(DEV_INSTANCE_URL)
 	connection, err := f.CreateWithAccessToken(
-		os.Getenv(VERSION),
-		os.Getenv(DEV_CONSUMER_KEY),
+		version,
+		consumerKey,
 		accessToken,
-		os.Getenv(DEV_INSTANCE_URL),
+		instanceURL,
 	)
-	return *connection, err
+	return connection, err
 }

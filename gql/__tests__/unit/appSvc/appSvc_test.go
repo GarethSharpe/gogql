@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"testing"
 
-	api "github.com/garethsharpe/gql/api/appsvc"
-	repos "github.com/garethsharpe/gql/api/infra"
-	"github.com/garethsharpe/gql/models"
-	"github.com/garethsharpe/gql/utils"
+	api "gogql/gql/api/appsvc"
+	repos "gogql/gql/api/infra"
+	"gogql/gql/models"
+	"gogql/gql/utils"
 )
 
 func TestAppSvc_GetCase(t *testing.T) {

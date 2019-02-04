@@ -6,10 +6,10 @@ import (
 	"os"
 
 	"github.com/99designs/gqlgen/handler"
-	api "github.com/garethsharpe/gql/api/appsvc"
-	"github.com/garethsharpe/gql/generated"
-	"github.com/garethsharpe/gql/resolvers"
-	"github.com/garethsharpe/gql/utils"
+	api "gogql/gql/api/appsvc"
+	"gogql/gql/generated"
+	"gogql/gql/resolvers"
+	"gogql/gql/utils"
 )
 
 func main() {
